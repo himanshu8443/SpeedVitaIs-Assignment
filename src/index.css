@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background: #333;
+}
+
+.light {
+  --color-primary-text: #333;
+  --color-secondary-text: #666;
+  --color-primary-background: #fff;
+  --color-secondary-background: #f3f3f3;
+}
+
+.dark {
+  --color-primary-text: #f3f3f3;
+  --color-secondary-text: #f3f3f3;
+  --color-primary-background: #333;
+  --color-secondary-background: #505050;
+}
