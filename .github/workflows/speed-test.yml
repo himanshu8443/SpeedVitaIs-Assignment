@@ -16,13 +16,13 @@ jobs:
           node-version: '18'
       
       - name: Install Speedvitals CLI
-        run: npm install -g speedvitals-cli
+        run: npm install -g speedvitals-cli-alpha
       
       - name: Run Performance Tests
         env:
           SPEEDVITALS_API_KEY: ${{ secrets.SPEEDVITALS_API_KEY }}
         run: |
-          speedvitals-cli analyze \
+          speedvitals-cli-alpha analyze \
             --urls '["https://example.com"]' \
             --performance-score 90 \
             --lcp 2500 \
