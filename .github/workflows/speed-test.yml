@@ -1,0 +1,31 @@
+name: Performance Testing
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  performance-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - name: Run Performance Analysis
+        env:
+          SPEEDVITALS_API_KEY: ${{ secrets.SPEEDVITALS_API_KEY }}
+        run: npx speedvitals-cli analyze \
+             --urls '["https://speed-vita-is-assignment.vercel.app/"]' \
+             --device mobile \
+             --location us \
+             --baseBranch main \
+             --fail-on-regression \
+             --lcp 2500 \
+             --cls 0.1 \
+             --fcp 1800 \
+             --tbt 200 \
+             --performance-score 90
