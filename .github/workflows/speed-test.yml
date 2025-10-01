@@ -1,26 +1,30 @@
 name: Performance Testing
 
 on:
-  push:
-    branches: [ main, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main]
 
 jobs:
-  performance-test:
+  performance:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
-          cache: "npm"
-      - name: Run Performance Analysis
+          node-version: '18'
+      
+      - name: Install Speedvitals CLI
+        run: npm install -g speedvitals-cli
+      
+      - name: Run Performance Tests
         env:
           SPEEDVITALS_API_KEY: ${{ secrets.SPEEDVITALS_API_KEY }}
-        run: npx speedvitals-cli-alpha analyze \
-             --urls '["https://example.com"]' \
-             --performance-score 90 \
-             --lcp 2500 \
-             --cls 0.1 \
-             --fail-on-regression
+        run: |
+          speedvitals-cli analyze \
+            --urls '["https://example.com"]' \
+            --performance-score 90 \
+            --lcp 2500 \
+            --cls 0.1 \
+            --fail-on-regression
