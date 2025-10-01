@@ -18,4 +18,4 @@ jobs:
       - name: Run Performance Analysis
         env:
           SPEEDVITALS_API_KEY: ${{ secrets.SPEEDVITALS_API_KEY }}
-        run: npx speedvitals-cli-alpha analyze --urls '["https://speed-vita-is-assignment.vercel.app/"]' --device mobile --location us --baseBranch main --lcp 2500 --cls 0.1 --fcp 1800 --tbt 200 --performance-score 99 --fail-on-regression false
+        run: npx speedvitals analyze --urls '["https://speed-vita-is-assignment.vercel.app/"]' --device mobile --location us --baseBranch main --lcp 2500 --cls 0.1 --fcp 1800 --tbt 200 --performance-score 99 --fail-on-regression false
